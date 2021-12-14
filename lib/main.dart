@@ -20,24 +20,26 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
     );
   }
-  }
-  class HomePage extends StatefulWidget {
+}
 
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
-  }
+}
 
-  class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> {
   List _items = [];
+  List _subItems = [];
 
   Future<void> readJson() async {
-  final String response = await rootBundle.loadString('assets/menuler.json');
-  final data = await json.decode(response);
-  setState(() {
-  _items = data["menus"][0]["items"];
-  });
+    final String response = await rootBundle.loadString('assets/menuler.json');
+    final data = await json.decode(response);
+    setState(() {
+      _items = data["menus"][0]["items"];
+      _subItems = data["subMenus"];
+    });
   }
 
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class MyApp extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'Kindacode.com',
+          'SiparişVer.com',
         ),
       ),
       body: Padding(
@@ -60,31 +62,34 @@ class MyApp extends StatelessWidget {
             // Display the data loaded from sample.json
             _items.isNotEmpty
                 ? Expanded(
-              child: ListView.builder(
-                itemCount: _items.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    margin: const EdgeInsets.all(10),
-                    child: Column(
-                    children: [
-                      ListTile(
-                      leading: Image.asset(_items[index]["image"],width:50,height:50),
-                      title: Text(_items[index]["name"]),
-                      subtitle: Text(_items[index]["name"]),
-                      onTap: () {
-                        //Go to the next screen with Navigator.push
+                    child: ListView.builder(
+                      itemCount: _items.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                            margin: const EdgeInsets.all(10),
+                            child: ExpansionTile(
+                                leading: Image.asset(_items[index]["image"]),
+                                title: Text(_items[index]["name"]),
+                                children: <Widget>[
+                                  Expanded(
+                                      child: ListView.builder(
+                                          itemCount:
+                                              _items[index]["items"].length,
+                                          itemBuilder: (context, index) {
+                                            return ListTile(
+                                              leading: Image.asset(
+                                                  _items[index]["image"]),
+                                             
+                                            );
+                                          }))
+                                ]));
                       },
                     ),
-                  ],
-                    ),
-                  );
-                },
-              ),
-            )
-                : Container()
+                  )
+                : Container(),
           ],
         ),
       ),
     );
   }
-  }
+}
