@@ -71,17 +71,21 @@ class _HomePageState extends State<HomePage> {
                                 leading: Image.asset(_items[index]["image"]),
                                 title: Text(_items[index]["name"]),
                                 children: <Widget>[
-                                  Expanded(
-                                      child: ListView.builder(
-                                          itemCount:
-                                              _items[index]["items"].length,
-                                          itemBuilder: (context, index) {
-                                            return ListTile(
-                                              leading: Image.asset(
-                                                  _items[index]["image"]),
-                                             
-                                            );
-                                          }))
+                                 // for (int i = 0; i < _items[index]["items"].length; i++) ...[
+                                    for(Map obj in _items[index]["items"])
+                                      Text(obj["name"]),
+
+                                  // Expanded(
+                                  //     child: ListView.builder(
+                                  //         itemCount:
+                                  //             _items[index]["items"].length,
+                                  //         itemBuilder: (context, index) {
+                                  //           return ListTile(
+                                  //             leading: Image.asset(
+                                  //                 _items[index]["image"]),
+                                  //
+                                  //           );
+                                  //         }))
                                 ]));
                       },
                     ),
