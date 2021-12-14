@@ -33,6 +33,9 @@ class _HomePageState extends State<HomePage> {
   List _items = [];
   List _subItems = [];
 
+ /* final GlobalKey<AppExpansionTileState> expansionTile = new GlobalKey();
+  String foos = 'One';*/
+
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('assets/menuler.json');
     final data = await json.decode(response);
@@ -71,15 +74,24 @@ class _HomePageState extends State<HomePage> {
                                 leading: Image.asset(_items[index]["image"]),
                                 title: Text(_items[index]["name"]),
                                 children: <Widget>[
-                                    for(Map obj in _items[index]["items"])
-                                      Row(
-                                          children: [
-                                            Text(obj["price"].toString()),
-                                            Text(obj["name"]),
-                                          ]),
-
-
-
+                                  for (Map obj in _items[index]["items"])
+                                    Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Image.asset(
+                                            obj["image"],
+                                            height: 50,
+                                            width: 50,
+                                          ),
+                                          Text(obj["name"]),
+                                          Container(
+                                              alignment: Alignment.centerLeft,
+                                              height: 20,
+                                              child: Text(
+                                                obj["price"].toString(),
+                                              )),
+                                        ]),
 
                                   // Expanded(
                                   //     child: ListView.builder(
