@@ -71,9 +71,15 @@ class _HomePageState extends State<HomePage> {
                                 leading: Image.asset(_items[index]["image"]),
                                 title: Text(_items[index]["name"]),
                                 children: <Widget>[
-                                 // for (int i = 0; i < _items[index]["items"].length; i++) ...[
                                     for(Map obj in _items[index]["items"])
-                                      Text(obj["name"]),
+                                      Row(
+                                          children: [
+                                            Text(obj["price"].toString()),
+                                            Text(obj["name"]),
+                                          ]),
+
+
+
 
                                   // Expanded(
                                   //     child: ListView.builder(
