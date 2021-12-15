@@ -32,8 +32,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List _items = [];
   List _subItems = [];
+  bool value = false;
 
- /* final GlobalKey<AppExpansionTileState> expansionTile = new GlobalKey();
+  /* final GlobalKey<AppExpansionTileState> expansionTile = new GlobalKey();
   String foos = 'One';*/
 
   Future<void> readJson() async {
@@ -65,53 +66,52 @@ class _HomePageState extends State<HomePage> {
             // Display the data loaded from sample.json
             _items.isNotEmpty
                 ? Expanded(
-                    child: ListView.builder(
-                      itemCount: _items.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                            margin: const EdgeInsets.all(10),
-                            child: ExpansionTile(
-                                leading: Image.asset(_items[index]["image"]),
-                                title: Text(_items[index]["name"]),
-                                children: <Widget>[
-                                  for (Map obj in _items[index]["items"])
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Image.asset(
-                                            obj["image"],
-                                            height: 50,
-                                            width: 50,
-                                          ),
-                                          Text(obj["name"]),
-                                          Container(
-                                              alignment: Alignment.centerLeft,
-                                              height: 20,
-                                              child: Text(
-                                                obj["price"].toString(),
-                                              )),
-                                        ]),
+              child: ListView.builder(
+                itemCount: _items.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                      margin: const EdgeInsets.all(10),
+                      child: ExpansionTile(
+                          leading: Image.asset(_items[index]["image"]),
+                          title: Text(_items[index]["name"]),
+                          children: <Widget>[
+                            for (Map obj in _items[index]["items"])
+                              Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Image.asset(
+                                      obj["image"],
+                                      height: 50,
+                                      width: 50,
+                                    ),
+                                    Text(obj["name"]),
+                                    Container(
+                                        alignment: Alignment.centerLeft,
+                                        height: 20,
+                                        child: Text(
+                                          obj["price"].toString(),
+                                        )),
+                                    Checkbox(
+                                      value: value,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          this.value = value!;
+                                        });
+                                      },
+                                    ),
 
-                                  // Expanded(
-                                  //     child: ListView.builder(
-                                  //         itemCount:
-                                  //             _items[index]["items"].length,
-                                  //         itemBuilder: (context, index) {
-                                  //           return ListTile(
-                                  //             leading: Image.asset(
-                                  //                 _items[index]["image"]),
-                                  //
-                                  //           );
-                                  //         }))
-                                ]));
-                      },
-                    ),
-                  )
+                                  ]),
+                          ]));
+                },
+              ),
+            )
                 : Container(),
           ],
         ),
       ),
     );
   }
+
+
 }
