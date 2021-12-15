@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       // Hide the debug banner
       debugShowCheckedModeBanner: false,
-      title: 'Kindacode.com',
+      title: 'SiparişVer',
       home: HomePage(),
     );
   }
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'SiparişVer.com',
+          'SiparişVer',
         ),
       ),
       body: Padding(
@@ -62,7 +62,6 @@ class _HomePageState extends State<HomePage> {
               child: const Text('Load Data'),
               onPressed: readJson,
             ),
-
             // Display the data loaded from sample.json
             _items.isNotEmpty
                 ? Expanded(
