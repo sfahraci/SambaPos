@@ -58,8 +58,8 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(25),
         child: Column(
           children: [
-            ElevatedButton(
-              child: const Text('Load Data'),
+            TextButton(
+              child: const Text('Menüler'),
               onPressed: readJson,
             ),
             // Display the data loaded from sample.json
